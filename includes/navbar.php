@@ -53,7 +53,7 @@ $navcats = $conn->query("SELECT * FROM category WHERE cat_status=1 LIMIT 2");
 									<div class="col-sm-6 col-lg-3">
 										<div class="card bg-transparent">
 											<!-- Card img -->
-											<img class="card-img rounded" src="upload/<?php echo $navblogsrow['blog_image'];?>" alt="">
+											<img class="card-img rounded" src="uploads/<?php echo $navblogsrow['blog_image'];?>" alt="">
 											<div class="card-body px-0 pt-3">
 												<h6 class="card-title mb-0"><a href="post-single.php?id=<?php echo $navblogsrow['blog_id'];?>&<?php echo $navblogsrow['blog_slag'];?>" class="btn-link text-reset fw-bold"><?php echo $navblogsrow['blog_title'];?></a></h6>
 												
