@@ -7,12 +7,13 @@ Footer START -->
 		<div class="row bg-dark py-5 mx-0 card card-header flex-row align-items-center text-center text-md-start">
 			<!-- Copyright -->
 			<div class="col-md-5 mb-3 mb-md-0">
-				<div class="text-primary-hover text-body-secondary">©2024 <a href="https://www.smartmoneyke.com.com/" class="text-reset btn-link" target="_blank">Smart Money Kenya</a>. All rights reserved
+				<div class="text-primary-hover text-body-secondary">©2024 <a href="https://www.smartmoneyke.com.com/" class="text-reset btn-link" target="_blank">Money Smart Kenya</a>. All rights reserved
 				</div>
 			</div>
 			<!-- Logo -->
-			<div class="col-md-3 mb-3 mb-md-0">
-				<img src="assets/images/logo.png" alt="footer logo">
+			<div class="col-md-3 mb-3 mb-md-0">		
+				<img class="navbar-brand-item" src="assets/images/logo3-dark.png" alt="logo"style="width:180px;height:80px;">			
+			
 			</div>
 			<!-- Social links -->
 			<div class="col-md-4">

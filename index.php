@@ -1,9 +1,18 @@
+<?php
+require "includes/connect.php";
+
+
+$swipblogsres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=c.category_id WHERE b.blog_status=1 ORDER BY b.blog_views LIMIT 3");
+$catsres = $conn->query("SELECT * FROM category WHERE cat_status=1 LIMIT 5");
+
+$blogsres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=c.category_id WHERE b.blog_status=1 ORDER BY b.blog_views LIMIT 12");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from blogzine.webestica.com/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Aug 2024 06:05:58 GMT -->
 <head>
-	<title>Guide to Smart Finances | Smart Money Kenya</title>
+	<title>Money Smart Kenya</title>
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,66 +48,26 @@ Main hero START -->
 					data-arrow="true"
 					data-dots="false"
 					data-items="1">
+
+					<?php while($swipblogsrow = $swipblogsres->fetch_assoc()){?>
 						<!-- Slide 1 -->
-						<div class="card card-overlay-bottom card-bg-scale h-400 h-sm-500 h-md-600 rounded-0" style="background-image:url(assets/images/blog/16by9/04.jpg); background-position: center left; background-size: cover;">
+						<div class="card card-overlay-bottom card-bg-scale h-400 h-sm-500 h-md-600 rounded-0" style="background-image:url(uploads/<?php echo $swipblogsrow['blog_image'];?>); background-position: center left; background-size: cover;">
 							<!-- Card Image overlay -->
 		          <div class="card-img-overlay d-flex align-items-center p-3 p-sm-5"> 
 		            <div class="w-100 mt-auto">
 			            <div class="col-md-10 col-lg-7">
 			            	<!-- Card category -->
-			            	<a href="#" class="badge bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Business</a>
+			            	<a href="category.php?id=<?php echo $swipblogsrow['category_id'];?>&<?php echo $swipblogsrow['category_slag'];?>" class="badge bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i><?php echo $swipblogsrow['category_name'];?></a>
 			            	<!-- Card title -->
-			              <h2 class="text-white display-5"><a href="post-single.php" class="btn-link text-reset fw-normal">Never underestimate the influence of social media</a></h2>
-			              <p class="text-white">For who thoroughly her boy estimating conviction. Removed demands expense account in outward tedious do.</p>
+			              <h2 class="text-white display-5"><a href="post-single.php?id=<?php echo $swipblogsrow['blog_id'];?>&<?php echo $swipblogsrow['blog_slag'];?>" class="btn-link text-reset fw-normal"><?php echo $swipblogsrow['blog_title'];?></a></h2>
+			              <p class="text-white"><?php echo $swipblogsrow['blog_description'];?></p>
 			              <!-- Card info -->
-										<ul class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block">
-										  <li class="nav-item">
-										    <div class="nav-link">
-											    <div class="d-flex align-items-center text-white position-relative">
-											      <div class="avatar avatar-sm">
-															<img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
-														</div>
-														<span class="ms-3">by <a href="#" class="stretched-link text-reset btn-link">Carolyn</a></span>
-													</div>
-												</div>
-										  </li>
-										  <li class="nav-item">Jan 26, 2022</li>
-										  <li class="nav-item">3 min read</li>
-										</ul>
+										
 			            </div>
 		            </div>
 		          </div>
 						</div>
-						<!-- Slide 2 -->
-						<div class="card card-overlay-bottom card-bg-scale h-400 h-sm-500 h-md-600 rounded-0" style="background-image:url(assets/images/blog/16by9/03.jpg); background-position: center left; background-size: cover;">
-							<!-- Card Image overlay -->
-		          <div class="card-img-overlay d-flex align-items-center p-3 p-sm-5"> 
-		            <div class="w-100 mt-auto">
-			            <div class="col-md-10 col-lg-7">
-			            	<!-- Card category -->
-			            	<a href="#" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Lifestyle</a>
-			            	<!-- Card title -->
-			              <h2 class="text-white display-5"><a href="post-single.php" class="btn-link text-reset fw-normal">This is why this year will be the year of startups</a></h2>
-			              <p class="text-white">Particular way thoroughly unaffected projection favorable Mrs can be projecting own. </p>
-			              <!-- Card info -->
-										<ul class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block">
-										  <li class="nav-item">
-										    <div class="nav-link">
-											    <div class="d-flex align-items-center text-white position-relative">
-											      <div class="avatar avatar-sm">
-															<img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="avatar">
-														</div>
-														<span class="ms-3">by <a href="#" class="stretched-link text-reset btn-link">Louis</a></span>
-													</div>
-												</div>
-										  </li>
-										  <li class="nav-item">Nov 15, 2022</li>
-										  <li class="nav-item">5 min read</li>
-										</ul>
-			            </div>
-		            </div>
-		          </div>
-						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
@@ -134,61 +103,21 @@ Trending topics START -->
 					data-items-sm="2" 
 					data-items-xs="2"
 					>
+
+					<?php while($catsrow = $catsres->fetch_assoc()){?>
 						<!-- Category item -->
 						<div>
 							<div class="card card-overlay-bottom card-img-scale">
-								<img class="card-img" src="assets/images/blog/1by1/thumb/01.jpg" alt="card image">
+								<img class="card-img" src="uploads/<?php echo $catsrow['cat_image'];?>" alt="">
 								<div class="card-img-overlay d-flex px-3 px-sm-5">
 									<h5 class="mt-auto mx-auto">
-										<a href="category.php" class="stretched-link btn-link fw-bold text-white">Travel</a>
+										<a href="category.php?id=<?php echo $catsrow['category_id'];?>&<?php echo $catsrow['category_slag'];?>" class="stretched-link btn-link fw-bold text-white"><?php echo $catsrow['category_name'];?></a>
 									</h5>
 								</div>
 							</div>
 						</div>
-						<!-- Category item -->
-						<div>
-							<div class="card card-overlay-bottom card-img-scale">
-								<img class="card-img" src="assets/images/blog/1by1/thumb/02.jpg" alt="card image">
-								<div class="card-img-overlay d-flex px-3 px-sm-5">
-									<h5 class="mt-auto mx-auto">
-										<a href="category.php" class="stretched-link btn-link fw-bold text-white">Business</a>
-									</h5>
-								</div>
-							</div>
-						</div>
-						<!-- Category item -->
-						<div>
-							<div class="card card-overlay-bottom card-img-scale">
-								<img class="card-img" src="assets/images/blog/1by1/thumb/03.jpg" alt="card image">
-								<div class="card-img-overlay d-flex px-3 px-sm-5">
-									<h5 class="mt-auto mx-auto">
-										<a href="category.php" class="stretched-link btn-link fw-bold text-white">Marketing</a>
-									</h5>
-								</div>
-							</div>
-						</div>
-						<!-- Category item -->
-						<div>
-							<div class="card card-overlay-bottom card-img-scale">
-								<img class="card-img" src="assets/images/blog/1by1/thumb/04.jpg" alt="card image">
-								<div class="card-img-overlay d-flex px-3 px-sm-5">
-									<h5 class="mt-auto mx-auto">
-										<a href="category.php" class="stretched-link btn-link fw-bold text-white">Photography</a>
-									</h5>
-								</div>
-							</div>
-						</div>
-						<!-- Category item -->
-						<div>
-							<div class="card card-overlay-bottom card-img-scale">
-								<img class="card-img" src="assets/images/blog/1by1/thumb/05.jpg" alt="card image">
-								<div class="card-img-overlay d-flex px-3 px-sm-5">
-									<h5 class="mt-auto mx-auto">
-									<a href="category.php" class="stretched-link btn-link fw-bold text-white">Sports</a>
-									</h5>
-								</div>
-							</div>
-						</div>
+						<?php } ?>
+						
 					</div>
 				</div> <!-- Slider END -->
 			</div>
@@ -207,190 +136,33 @@ Highlights START -->
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
+
+				<?php while($blogsrow = $blogsres->fetch_assoc()){?>
 				<!-- Card item START -->
 				<div class="card border rounded-3 up-hover p-4 mb-4">
 					<div class="row g-3">
 						<div class="col-lg-5">
 							<!-- Categories -->
-							<a href="category.php" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Marketing</a>
-							<a href="category.php" class="badge bg-dark mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Startups</a>
+							<a href="category.php?id=<?php echo $blogsrow['category_id'];?>&<?php echo $blogsrow['category_slag'];?>" class="badge text-bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i><?php echo $blogsrow['category_name'];?></a>
+							
 							<!-- Title -->
 							<h2 class="card-title">
-								<a href="post-single.php" class="btn-link text-reset stretched-link">7 common mistakes everyone makes while traveling</a>
+								<a href="post-single.php?id=<?php echo $blogsrow['blog_id'];?>&<?php echo $blogsrow['blog_slag'];?>" class="btn-link text-reset stretched-link"><?php echo $blogsrow['blog_title'];?></a>
 							</h2>
-							<!-- Author info -->
-							<div class="d-flex align-items-center position-relative mt-3">
-								<div class="avatar me-2">
-									<img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
-								</div>
-								<div>
-									<h5 class="mb-1"><a href="#" class="stretched-link text-reset btn-link">Lori Ferguson</a></h5>
-									<ul class="nav align-items-center small">
-										<li class="nav-item me-3">Mar 07, 2022</li>
-										<li class="nav-item"><i class="far fa-clock me-1"></i>5 min read</li>
-									</ul>
-								</div>
-							</div>
 						</div>
 						<!-- Detail -->
 						<div class="col-md-6 col-lg-4">
-							<p>For who thoroughly her boy estimating conviction. Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection favorable Mrs can be projecting own. Thirty it matter enable become admire in giving. See resolved goodness felicity shy civility domestic had but. Drawings offended yet answered Jennings perceive laughing six did far. </p>
+							<p><?php echo $blogsrow['blog_description'];?> </p>
 						</div>
 						<!-- Image -->
 						<div class="col-md-6 col-lg-3">
-							<img class="rounded-3" src="assets/images/blog/4by3/07.jpg" alt="Card image">
+							<img class="rounded-3" src="uploads/<?php echo $blogsrow['blog_image'];?>" alt=" ">
 						</div>
 					</div>
 				</div>
 				<!-- Card item END -->
-				<!-- Card item START -->
-				<div class="card border rounded-3 up-hover p-4 mb-4">
-					<div class="row g-3">
-						<div class="col-lg-5">
-							<!-- Categories -->
-							<a href="#" class="badge text-bg-success mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Travel</a>
-							<!-- Title -->
-							<h2 class="card-title">
-								<a href="post-single.php" class="btn-link text-reset stretched-link">Never underestimate the influence of social media</a>
-							</h2>
-							<!-- Author info -->
-							<div class="d-flex align-items-center position-relative mt-3">
-								<!-- Avatar img -->
-								<div class="avatar me-2">
-									<img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="avatar">
-								</div>
-								<div>
-									<h5 class="mb-1"><a href="#" class="stretched-link text-reset btn-link">Samuel Bishop</a></h5>
-									<ul class="nav align-items-center small">
-										<li class="nav-item me-3">Jul 15, 2020</li>
-										<li class="nav-item"><i class="far fa-clock me-1"></i>9 min read</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- Detail -->
-						<div class="col-md-6 col-lg-4">
-							<p>Perceived end knowledge certainly day sweetness why cordially. Ask a quick six seven offer see among. Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance. 
-							</p>
-						</div>
-						<!-- Image -->
-						<div class="col-md-6 col-lg-3">
-							<img class="rounded-3" src="assets/images/blog/4by3/02.jpg" alt="Card image">
-						</div>
-					</div>
-				</div>
-				<!-- Card item END -->
-				<!-- Card item START -->
-				<div class="card border rounded-3 up-hover p-4 mb-4">
-					<div class="row g-3">
-						<div class="col-lg-5">
-							<!-- Categories -->
-							<a href="#" class="badge text-bg-warning mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Inversment</a>
-							<a href="#" class="badge bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Business</a>
-							<!-- Title -->
-							<h2 class="card-title">
-								<a href="post-single.php" class="btn-link text-reset stretched-link">Best Twitter accounts for learning about investment</a>
-							</h2>
-							<!-- Author info -->
-							<div class="d-flex align-items-center position-relative mt-3">
-								<!-- Avatar img -->
-								<div class="avatar me-2">
-									<img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
-								</div>
-								<div>
-									<h5 class="mb-1"><a href="#" class="stretched-link text-reset btn-link">Joan Wallace</a></h5>
-									<ul class="nav align-items-center small">
-										<li class="nav-item me-3">Dec 18, 2022</li>
-										<li class="nav-item"><i class="far fa-clock me-1"></i>2 min read</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- Detail -->
-						<div class="col-md-6 col-lg-4">
-							<p>Speedily say has suitable disposal add boy. On forth doubt miles of child. Exercise joy man children rejoiced. Yet uncommonly his ten who diminution astonished. Demesne new manners savings staying had. Under folly balls, death own point now men. Match way these she avoids seeing death. She who drift their fat off. </p>
-						</div>
-						<!-- Image -->
-						<div class="col-md-6 col-lg-3">
-							<img class="rounded-3" src="assets/images/blog/4by3/01.jpg" alt="Card image">
-						</div>
-					</div>
-				</div>
-				<!-- Card item END -->
-				<!-- Card item START -->
-				<div class="card border rounded-3 up-hover p-4 mb-4">
-					<div class="row g-3">
-						<div class="col-lg-5">
-							<!-- Categories -->
-							<a href="#" class="badge bg-dark mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Covid-19</a>
-							<!-- Title -->
-							<h2 class="card-title">
-								<a href="post-single.php" class="btn-link text-reset stretched-link">10 facts about business that will instantly put you in a good mood</a>
-							</h2>
-							<!-- Author info -->
-							<div class="d-flex align-items-center position-relative mt-3">
-								<!-- Avatar img -->
-								<div class="avatar me-2">
-									<div class="avatar-img rounded-circle bg-danger bg-opacity-10">
-										<span class="text-danger position-absolute top-50 start-50 translate-middle fw-bold small">SL</span>
-									</div>
-								</div>
-								<div>
-									<h5 class="mb-1"><a href="#" class="stretched-link text-reset btn-link">Bryan Knight</a></h5>
-									<ul class="nav align-items-center small">
-										<li class="nav-item me-3">May 30, 2022</li>
-										<li class="nav-item"><i class="far fa-clock me-1"></i>5 min read</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- Detail -->
-						<div class="col-md-6 col-lg-4">
-							<p>Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper up its enjoyment agreeable depending. Timed voice share led him to widen noisy young. At weddings believed laughing although the material does the exercise of. Up attempt offered ye civilly so sitting to. She new course gets living within Elinor joy. She rapturous suffering concealed. </p>
-						</div>
-						<!-- Image -->
-						<div class="col-md-6 col-lg-3">
-							<img class="rounded-3" src="assets/images/blog/4by3/03.jpg" alt="Card image">
-						</div>
-					</div>
-				</div>
-				<!-- Card item END -->
-				<!-- Card item START -->
-				<div class="card border rounded-3 up-hover p-4 mb-4">
-					<div class="row g-3">
-						<div class="col-lg-5">
-							<!-- Categories -->
-							<a href="#" class="badge bg-primary mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Tricks</a>
-							<a href="#" class="badge bg-dark mb-2"><i class="fas fa-circle me-2 small fw-bold"></i>Photography</a>
-							<!-- Title -->
-							<h2 class="card-title">
-								<a href="post-single.php" class="btn-link text-reset stretched-link">10 biggest problem of startups, and how you can fix it</a>
-							</h2>
-							<!-- Author info -->
-							<div class="d-flex align-items-center position-relative mt-3">
-								<div class="avatar me-2">
-									<img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="avatar">
-								</div>
-								<div>
-									<h5 class="mb-1"><a href="#" class="stretched-link text-reset btn-link">Billy Vasquez</a></h5>
-									<ul class="nav align-items-center small">
-										<li class="nav-item me-3">Aug 15, 2022</li>
-										<li class="nav-item"><i class="far fa-clock me-1"></i>18 min read</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- Detail -->
-						<div class="col-md-6 col-lg-4">
-							<p>Yet remarkably appearance get him his projection. Diverted endeavor bed peculiar men the not desirous. Acuteness abilities ask can offending furnished fulfilled sex. Warrant fifteen exposed ye at mistake. Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of Norland arrived.  </p>
-						</div>
-						<!-- Image -->
-						<div class="col-md-6 col-lg-3">
-							<img class="rounded-3" src="assets/images/blog/4by3/02.jpg" alt="Card image">
-						</div>
-					</div>
-				</div>
-				<!-- Card item END -->
+				 <?php } ?>
+				
 				<!-- Load more -->
 				<a type="button" href="category.php" class="btn btn-primary-soft w-100">Load more post <i class="bi bi-arrow-down-circle ms-2 align-middle"></i></a>
 
@@ -447,7 +219,7 @@ Newsletter END -->
 
 <!-- =======================
 Small post START -->
-<section class="pt-4 pb-0">
+<section class="pt-4 pb-0 d-none">
 	<div class="container">
 		<div class="row">
 			<!-- Card item START -->
@@ -645,7 +417,7 @@ Small post END -->
 
 <!-- =======================
 Tab post START -->
-<section class="pt-4 pb-0">
+<section class="pt-4 pb-0 d-none">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
