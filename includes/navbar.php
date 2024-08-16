@@ -70,7 +70,7 @@ $navcats = $conn->query("SELECT * FROM category WHERE cat_status=1 LIMIT 2");
 											<span>Smart Money</span>
 											<h3>Insights Direct to your E-Mail</h3>
 											<p>Become a Member Today!</p>
-											<a href="#" class="btn btn-warning">Subscribe Now!</a>
+											<a href="index.php#subscribe" class="btn btn-warning">Subscribe Now!</a>
 										</div>
 									</div>
 									<!-- Card item END -->
@@ -100,7 +100,7 @@ $navcats = $conn->query("SELECT * FROM category WHERE cat_status=1 LIMIT 2");
 
 
 					<!-- Nav item 5 link-->
-					<li class="nav-item"> <a class="nav-link link-danger fs-5" href="subscribe.php"><u>Subscribe Now</u></a></li>
+					<li class="nav-item"> <a class="nav-link link-danger fs-5" href="index.php#subscribe"><u>Subscribe Now</u></a></li>
 				</ul>
 			</div>
 			<!-- Main navbar END -->

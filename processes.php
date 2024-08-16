@@ -73,6 +73,23 @@ elseif(isset($_POST["post-comment"])){
     }
 
 }
+
+elseif(isset($_POST["subscribe"])){
+    $email = mysqli_real_escape_string($conn, $_POST["subscribe"]);
+
+    
+    $insert = "INSERT INTO subscriber (`email`, `date_created`) VALUES ('$email', '$date')";
+
+    if ($conn->query($insert)===TRUE){
+          
+        header("location: thank-you.php");
+        
+    }else{
+        $_SESSION["error"] = "Error Occured. Please Try Again". $conn->error;
+        header("location: thank-you.php");
+    }
+
+}
 elseif(isset($_POST["checkout"])){
     $fname = mysqli_real_escape_string($conn, $_POST["fname"]);
     $lname = mysqli_real_escape_string($conn, $_POST["lname"]);

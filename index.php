@@ -175,7 +175,7 @@ Highlights END -->
 
 <!-- =======================
 Newsletter START -->
-<section class="pt-0">
+<section class="pt-0" id="subscribe">
 	<div class="container">
 		<div class="row">
 			<div class="col">

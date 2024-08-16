@@ -1,29 +1,20 @@
 <?php
 require "includes/connect.php";
 
-if(isset($_GET['id'])){
-	$id = $_GET['id'];
-	$blogsres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=c.category_id WHERE b.blog_status=1 AND b.category_id=$id ORDER BY b.blog_views");
 
-	$catres = $conn->query("SELECT * FROM category WHERE category_id=$id");
-	$catrow = $catres->fetch_assoc();
-
-	$title = $catrow["category_name"];
-}else{
 	$blogsres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=c.category_id WHERE b.blog_status=1 ORDER BY b.blog_views");
 
-	$title = "Top Posts";
-}
 
 
-$catsres = $conn->query("SELECT * FROM category WHERE cat_status=1 AND category_id<>$id LIMIT 5");
+
+$catsres = $conn->query("SELECT * FROM category WHERE cat_status=1 LIMIT 5");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
-	<title><?php echo $title;?> | Money Smart Kenya</title>
+	<title>Thank you for Subscribing | Money Smart Kenya</title>
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,24 +41,13 @@ Inner intro START -->
 <section class="pt-4">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
-				<div class="card bg-dark-overlay-4 overflow-hidden card-bg-scale h-300 text-center" style="background-image:url(uploads/<?php echo $catrow["cat_image"];?>); background-position: center left; background-size: cover;">
-					<!-- Card Image overlay -->
-					<div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
-						<div class="w-100 my-auto">
-							<div class="text-white mb-3">Browsing category:</div>
-							<h1 class="text-white h2">
-								<span class="badge text-bg-warning mb-2">
-									<i class="fas fa-circle me-2 small fw-bold"></i><?php echo $catrow["category_name"];?></span>
-							</h1>
-							<div class="text-center position-relative">
-								<span class="badge text-bg-info fs-6"><?php echo $blogsres->num_rows; ?> posts</span>
-							</div>
-						</div>
-					</div>
+      <div class="col-12">
+				<div class="bg-primary bg-opacity-10 p-4 p-md-5 rounded-3 text-center">
+					<h1 class="text-primary">Thank You for Subscribing!</h1>
+					<p>You will receive updates and news directly to your email.</p>
 				</div>
-			</div>
-		</div>
+      </div>
+    </div>
 	</div>
 </section>
 <!-- =======================
@@ -77,9 +57,13 @@ Inner intro END -->
 Main content START -->
 <section class="position-relative pt-0">
 	<div class="container" data-sticky-container>
+       
 		<div class="row">
 			<!-- Main Post START -->
 			<div class="col-lg-9">
+                <div class="text-center mb-2">
+                    <h2> More to Read</h2>
+                </div>
 				<div class="row gy-4">
 
 
