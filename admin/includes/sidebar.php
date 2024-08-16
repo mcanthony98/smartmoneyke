@@ -75,7 +75,7 @@
             <a href="leads.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Form Leads
+                Subscribers
               </p>
             </a>
           </li>

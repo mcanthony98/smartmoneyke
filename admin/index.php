@@ -38,7 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="row">
           <div class="col-lg-6 mx-auto pt-5">
             <div class="mt-5 text-center">
-              <img src="../assets/img/logo2.png" alt="Logo" class="brand-image" style="max-width:90px;" style="opacity: .8"><br>
+              <img src="../assets/images/logo2.png" alt="Logo" class="brand-image" style="max-width:90px;" style="opacity: .8"><br>
               <span class="brand-text font-weight-light">ADMIN PANEL</span>
             </div>
             <div class="card card-primary card-outline mt-2">

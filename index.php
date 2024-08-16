@@ -196,9 +196,9 @@ Newsletter START -->
 							<h2 class="display-5 text-white">Never miss a story!</h2>
 							<p class="text-white">Get the freshest headlines and updates sent uninterrupted to your inbox.</p>
 							<!-- Form -->
-							<form class="row row-cols-sm-auto g-2 align-items-center justify-content-center mt-3">
+							<form class="row row-cols-sm-auto g-2 align-items-center justify-content-center mt-3" method="post" action="processes.php">
 								<div class="col-12">
-									<input type="email" class="form-control form-control-lg" placeholder="Enter your email address">
+									<input type="email" class="form-control form-control-lg" placeholder="Enter your email address" name="subscribe">
 								</div>
 								<div class="col-12">
 									<button type="submit" class="btn btn-primary btn-lg m-0">Subscribe</button>

@@ -3,7 +3,7 @@ session_start();
 include "includes/sessions.php";
 include "../includes/connect.php";
 
-$res=$conn->query("SELECT * FROM lead ORDER BY lead_id DESC");
+$res=$conn->query("SELECT * FROM subscriber ORDER BY subscriber_id DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +27,12 @@ $res=$conn->query("SELECT * FROM lead ORDER BY lead_id DESC");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Form Leads</h1>
+            <h1 class="m-0">Subscribers</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Leads</li>
+              <li class="breadcrumb-item active">Subscribers</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -51,23 +51,15 @@ $res=$conn->query("SELECT * FROM lead ORDER BY lead_id DESC");
                                 <table id="example1" class="table table-bordered table-striped ">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
                                             <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Service</th>
-                                            <th>Message</th>
-                                            <th>Date Created</th>
+                                            <th>Date Subscribed</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php while($row = $res->fetch_assoc()){
                                          ?>
                                         <tr>
-                                            <td><?php echo $row["name"];?></td>
-                                            <td><?php echo $row["email"];?></td>
-                                            <td><?php echo $row["phone"];?></td>
-                                            <td><?php echo $row["service"];?></td>
-                                            <td><?php echo $row["message"];?></td>
+                                            <td><a href="mailto:<?php echo $row["email"];?>"><?php echo $row["email"];?></a></td>
                                             <td><span class="text-nowrap"><?php echo date('d/m/Y', strtotime($row['date_created']));?></span></td>
                                         </tr>
                                         <?php } ?>
