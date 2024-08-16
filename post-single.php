@@ -5,7 +5,7 @@ $sid = $_GET['id'];
 $profres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=c.category_id WHERE b.blog_id='$sid'");
 $row = $profres->fetch_assoc();
 
-$revres=$conn->query("SELECT * FROM review WHERE blog_id=$sid ORDER BY review_id DESC");
+$revres=$conn->query("SELECT * FROM review WHERE blog_id=$sid AND review_status=1 ORDER BY review_id DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
