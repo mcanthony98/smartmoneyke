@@ -4,6 +4,8 @@ require "includes/connect.php";
 $sid = $_GET['id'];
 $profres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=c.category_id WHERE b.blog_id='$sid'");
 $row = $profres->fetch_assoc();
+
+$revres=$conn->query("SELECT * FROM review WHERE blog_id=$sid ORDER BY review_id DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,83 +107,51 @@ Main START -->
 				<!-- Author info END -->
 
 				<!-- Comments START -->
-		<div class="mt-5 container">
-			<h3>5 comments</h3>
+		<div class="mt-5 container" id="comments">
+			<h3><?php echo $revres->num_rows;?> comments</h3>
+			<?php
+			if($revres->num_rows > 0){ 
+				while($revrow = $revres->fetch_assoc()){
+			?>
 			<!-- Comment level 1-->
 			<div class="my-4 d-flex">
-			  <img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/avatar/01.jpg" alt="avatar">
+			  <img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/user-placeholder.png" alt="avatar">
 			  <div>
 				<div class="mb-2">
-					<h5 class="m-0">Allen Smith</h5>
-					<span class="me-3 small">June 11, 2022 at 6:01 am </span>
-					<a href="#" class="text-body fw-normal">Reply</a>
+					<h5 class="m-0"><?php echo $revrow["name"];?></h5>
+					<span class="me-3 small"><?php echo date('M d, Y h:i A', strtotime($revrow['date_reviewed']));?></span>
+					
 				</div>
-				<p>Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant private blushes removed an in equally totally if. Delivered dejection necessary objection do Mr prevailed. Mr feeling does chiefly cordial in do. </p>
+				<p><?php echo $revrow["comment"];?> </p>
 			  </div>
 			</div>
-				<!-- Comment children level 2 -->
-				<div class="my-4 d-flex ps-2 ps-md-3">
-				  <img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/avatar/02.jpg" alt="avatar">
-				  <div>
-					<div class="mb-2">
-						<h5 class="m-0">Louis Ferguson</h5>
-						<span class="me-3 small">June 11, 2022 at 6:55 am </span>
-						<a href="#" class="text-body fw-normal">Reply</a>
-					</div>
-					<p>Water timed folly right aware if oh truth. Imprudence attachment him his for sympathize. Large above be to means. Dashwood does provide stronger is. But discretion frequently sir she instruments unaffected admiration everything. </p>
-				  </div>
-				</div>
-					<!-- Comment children level 3 -->
-					<div class="my-4 d-flex ps-3 ps-md-5">
-					  <img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/avatar/01.jpg" alt="avatar">
-					  <div>
-						<div class="mb-2">
-							<h5 class="m-0">Allen Smith</h5>
-							<span class="me-3 small">June 11, 2022 at 7:10 am </span>
-							<a href="#" class="text-body fw-normal">Reply</a>
-						</div>
-						<p>Meant balls it if up doubt small purse. </p>
-					  </div>
-					</div>
-				<!-- Comment level 2 -->
-				<div class="my-4 d-flex ps-2 ps-md-3">
-				  <img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/avatar/03.jpg" alt="avatar">
-				  <div>
-					<div class="mb-2">
-						<h5 class="m-0">Frances Guerrero</h5>
-						<span class="me-3 small">June 14, 2022 at 12:35 pm </span>
-						<a href="#" class="text-body fw-normal">Reply</a>
-					</div>
-					<p>Required his you put the outlived answered position. A pleasure exertion if believed provided to. All led out world this music while asked. Paid mind even sons does he door no. Attended overcame repeated it is perceived Marianne in. I think on style child of. Servants moreover in sensible it ye possible. </p>
-				  </div>
-				</div>
-			<!-- Comment level 1 -->
+			<?php }}else{ ?>
 			<div class="my-4 d-flex">
-			  <img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/avatar/04.jpg" alt="avatar">
-			  <div>
-				<div class="mb-2">
-					<h5 class="m-0">Judy Nguyen</h5>
-					<span class="me-3 small">June 18, 2022 at 11:55 am </span>
-					<a href="#" class="text-body fw-normal">Reply</a>
+				<div class="text-center">
+					<h4>No Comments Yet!</h4>
 				</div>
-				<p>Fulfilled direction use continual set him propriety continued. Saw met applauded favorite deficient engrossed concealed and her. Concluded boy perpetual old supposing. Farther related bed and passage comfort civilly. </p>
-			  </div>
 			</div>
+
+			  <?php } ?>
+				
 
 		</div>
 		<!-- Comments END -->
+
+				<hr class="my-4">
+
 		<!-- Reply START -->
 		<div class="container">
 			<h3>Leave a reply</h3>
 			<small>Your email address will not be published. Required fields are marked *</small>
-			<form class="row g-3 mt-2">
+			<form class="row g-3 mt-2" method="post" action="processes.php"> 
 			  <div class="col-md-6">
 				<label class="form-label">Name *</label>
-				<input type="text" class="form-control" aria-label="First name">
+				<input type="text" class="form-control" name="name" aria-label="First name" required>
 			  </div>
 			  <div class="col-md-6">
 				<label class="form-label">Email *</label>
-				<input type="email" class="form-control">
+				<input type="email" class="form-control" name="email" required>
 			  </div>
 			  <!-- custom checkbox -->
 				<div class="col-md-12">
@@ -192,17 +162,18 @@ Main START -->
 				</div>
 			  <div class="col-12">
 				<label class="form-label">Your Comment *</label>
-				  <textarea class="form-control" rows="3"></textarea>
+				  <textarea class="form-control" rows="3" name="comment" required></textarea>
 			  </div>
 			  <div class="col-12">
-				<button type="submit" class="btn btn-primary">Post comment</button>
+				<input type="hidden" name="blogid" value="<?php echo $sid;?>">
+				<button type="submit" name="post-comment" class="btn btn-primary">Post comment</button>
 			  </div>
 			</form>
 		</div>
 		<!-- Reply END -->
 
         <!-- Next prev post START -->
-				<div class="row g-0 mt-5 mx-0 border-top border-bottom">
+				<div class="row g-0 mt-5 mx-0 border-top border-bottom d-none">
 					<div class="col-sm-6 py-3 py-md-4">
 						<div class="d-flex align-items-center position-relative">
 							<!-- Icon -->

@@ -64,14 +64,18 @@ $res=$conn->query("SELECT * FROM review r JOIN blog b ON b.blog_id=r.blog_id ORD
                                         <tr>
                                             <td><?php echo $row["blog_title"];?></td>
                                             <td><?php echo $row["name"];?><br><?php echo $row["email"];?></td>
-                                            <td><strong>Rating: <?php echo $row["rating"];?>/5</strong><br/><?php echo $row["comment"];?></td>
-                                            <td><span class="text-nowrap"><?php echo date('M d, Y H:i:A', strtotime($row['date_reviewed']));?></span></td>
+                                            <td><?php echo $row["comment"];?></td>
+                                            <td><span class="text-nowrap"><?php echo date('M d, Y H:i A', strtotime($row['date_reviewed']));?></span></td>
                                             <td>
                                             <div class="form-group">
+                                              
+                                            <form method="post" action="processes.php">
                                               <div class="custom-control custom-switch">
-                                                <input type="checkbox" value="<?php echo $row["review_id"];?>" class="custom-control-input" id="customSwitch1" <?php if($row["review_status"] == 1){echo "checked";} ?> >
+                                                <input type="hidden" name="update-review-status" value="<?php echo $row["review_id"];?>">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" onchange="this.form.submit();" <?php if($row["review_status"] == 1){echo "checked";} ?> >
                                                 <label class="custom-control-label" for="customSwitch1"></label>
                                               </div>
+                                        </form>
                                             </div>
                                             </td>
                                         </tr>

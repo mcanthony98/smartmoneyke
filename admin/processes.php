@@ -699,4 +699,21 @@ elseif(isset($_POST["edit-spec-img"])){
               header("location: edit-specialism.php?id=$id");
           }
 }
+    
+elseif(isset($_POST["update-review-status"])){
+    $id = mysqli_real_escape_string($conn, $_POST["update-review-status"]);
+
+    $chkres = $conn->query("SELECT * FROM review WHERE review_id=$id");
+    $chkrow = $chkres->fetch_assoc();
+
+    if($chkrow['review_status'] == 1){
+        $res = $conn->query("UPDATE review SET review_status=0 WHERE review_id=$id");
+    }elseif($chkrow['review_status'] == 0){
+        $res = $conn->query("UPDATE review SET review_status=1 WHERE review_id=$id");
+    }
+
+
+    $_SESSION["success"] = "Review Updated Successfully!";
+    header("location: reviews.php");
+}
   ?>
