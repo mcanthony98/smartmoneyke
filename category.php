@@ -48,7 +48,7 @@ Header END -->
 <!-- =======================
 Inner intro START -->
 <section class="pt-4">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<div class="card bg-dark-overlay-4 overflow-hidden card-bg-scale h-300 text-center" style="background-image:url(uploads/<?php echo $catrow["cat_image"];?>); background-position: center left; background-size: cover;">
@@ -76,7 +76,7 @@ Inner intro END -->
 <!-- =======================
 Main content START -->
 <section class="position-relative pt-0">
-	<div class="container" data-sticky-container>
+	<div class="container-fluid" data-sticky-container>
 		<div class="row">
 			<!-- Main Post START -->
 			<div class="col-lg-9">

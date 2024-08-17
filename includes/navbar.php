@@ -4,7 +4,7 @@ $navcats = $conn->query("SELECT * FROM category WHERE cat_status=1 LIMIT 2");
 <header class="navbar-light navbar-sticky header-static">
 	<!-- Logo Nav START -->
 	<nav class="navbar navbar-expand-lg">
-		<div class="container">
+		<div class="container-fluid">
 			<!-- Logo START -->
 			<a class="navbar-brand py-0" href="index.php">
 				<img class="navbar-brand-item light-mode-item" src="assets/images/logo3.png" alt="logo" style="width:180px;height:80px;">			

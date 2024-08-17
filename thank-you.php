@@ -39,7 +39,7 @@ Header END -->
 <!-- =======================
 Inner intro START -->
 <section class="pt-4">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
       <div class="col-12">
 				<div class="bg-primary bg-opacity-10 p-4 p-md-5 rounded-3 text-center">
@@ -56,7 +56,7 @@ Inner intro END -->
 <!-- =======================
 Main content START -->
 <section class="position-relative pt-0">
-	<div class="container" data-sticky-container>
+	<div class="container-fluid" data-sticky-container>
        
 		<div class="row">
 			<!-- Main Post START -->

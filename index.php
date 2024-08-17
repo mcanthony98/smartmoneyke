@@ -23,7 +23,7 @@ $blogsres = $conn->query("SELECT * FROM blog b JOIN category c ON b.category_id=
 	   <?php include 'includes/head-content.php'; ?>
 </head>
 
-<body>
+<body class="container-fluid">
 
 <!-- =======================
 Header START -->
@@ -37,7 +37,7 @@ Header END -->
 <!-- =======================
 Main hero START -->
 <section class="pt-0 card-grid">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<div class="tiny-slider arrow-hover arrow-blur arrow-white arrow-round rounded-3 overflow-hidden">
@@ -81,7 +81,7 @@ Main hero END -->
 <!-- =======================
 Trending topics START -->
 <section class="p-0">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row g-0">
 			<div class="col-12 bg-light p-2 p-sm-4 rounded-3">
 				<!-- Title -->
@@ -133,7 +133,7 @@ Trending topics END -->
 <!-- =======================
 Highlights START -->
 <section class="pt-0">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 
@@ -176,7 +176,7 @@ Highlights END -->
 <!-- =======================
 Newsletter START -->
 <section class="pt-0" id="subscribe">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col">
 				<div class="bg-dark p-3 p-sm-5 rounded-3 position-relative overflow-hidden">
@@ -220,7 +220,7 @@ Newsletter END -->
 <!-- =======================
 Small post START -->
 <section class="pt-4 pb-0 d-none">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<!-- Card item START -->
 			<div class="col-sm-6 col-lg-3">
@@ -418,7 +418,7 @@ Small post END -->
 <!-- =======================
 Tab post START -->
 <section class="pt-4 pb-0 d-none">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<ul class="nav nav-tabs">

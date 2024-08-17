@@ -37,7 +37,7 @@ Header END -->
 <!-- =======================
 Inner intro START -->
 <section>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-9 mx-auto pt-md-5">
         <a href="#" class="badge text-bg-danger mb-2"><i class="fas fa-circle me-2 small fw-bold"></i><?php echo $row['category_name'];?></a>
@@ -60,7 +60,7 @@ Inner intro END -->
 <!-- =======================
 Main START -->
 <section class="pt-0">
-	<div class="container position-relative">
+	<div class="container-fluid position-relative">
 		<div class="row">
 			<!-- Main Content START -->
 			<div class="col-lg-9 mx-auto">
@@ -107,7 +107,7 @@ Main START -->
 				<!-- Author info END -->
 
 				<!-- Comments START -->
-		<div class="mt-5 container" id="comments">
+		<div class="mt-5 container-fluid" id="comments">
 			<h3><?php echo $revres->num_rows;?> comments</h3>
 			<?php
 			if($revres->num_rows > 0){ 
@@ -141,7 +141,7 @@ Main START -->
 				<hr class="my-4">
 
 		<!-- Reply START -->
-		<div class="container">
+		<div class="container-fluid">
 			<h3>Leave a reply</h3>
 			<small>Your email address will not be published. Required fields are marked *</small>
 			<form class="row g-3 mt-2" method="post" action="processes.php"> 

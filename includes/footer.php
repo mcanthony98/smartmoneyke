@@ -1,7 +1,7 @@
 <!-- =======================
 Footer START -->
 <footer>
-	<div class="container">
+	<div class="container-fluid">
         
 		<!-- About and Newsletter START -->
 		<div class="row bg-dark py-5 mx-0 card card-header flex-row align-items-center text-center text-md-start">
