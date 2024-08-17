@@ -75,10 +75,13 @@ elseif(isset($_POST["post-comment"])){
 }
 
 elseif(isset($_POST["subscribe"])){
-    $email = mysqli_real_escape_string($conn, $_POST["subscribe"]);
+    $fname = mysqli_real_escape_string($conn, $_POST["fname"]);
+    $lname = mysqli_real_escape_string($conn, $_POST["lname"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
 
     
-    $insert = "INSERT INTO subscriber (`email`, `date_created`) VALUES ('$email', '$date')";
+    $insert = "INSERT INTO subscriber (`firstname`, `lastname`, `phone`, `email`, `date_created`) VALUES ('$fname', '$lname', '$phone', '$email', '$date')";
 
     if ($conn->query($insert)===TRUE){
           
